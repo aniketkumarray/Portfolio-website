@@ -239,7 +239,7 @@ export function Hero({ onProgress, onReady, started }: HeroProps) {
           <div className="mx-auto mt-8 grid max-w-2xl grid-cols-3 gap-4">
             {profile.stats.slice(0, 3).map((s) => (
               <div key={s.label} className="glass rounded-2xl px-3 py-4">
-                <p className="font-display text-2xl font-bold text-accent md:text-4xl">{s.value}{s.suffix ?? ''}</p>
+                <p className="font-display text-2xl font-bold text-accent md:text-4xl">{'prefix' in s ? s.prefix : ''}{s.value}{'suffix' in s ? s.suffix : ''}</p>
                 <p className="mt-1 text-[11px] leading-tight text-text-secondary md:text-xs">{s.label}</p>
               </div>
             ))}

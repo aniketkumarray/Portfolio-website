@@ -67,7 +67,7 @@ export function ArchitectureDiagram({ nodes, edges, title = 'Architecture' }: Pr
       >
         <defs>
           <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-            <path d="M0 0 10 5 0 10z" fill="rgba(198,255,61,0.8)" />
+            <path d="M0 0 10 5 0 10z" fill="rgba(255, 176, 32,0.8)" />
           </marker>
         </defs>
         {edges.map((e, i) => {
@@ -86,7 +86,7 @@ export function ArchitectureDiagram({ nodes, edges, title = 'Architecture' }: Pr
               {e.label && (
                 <g>
                   <rect x={cx - e.label.length * 3.3 - 4} y={(y1 + y2) / 2 - 15} width={e.label.length * 6.6 + 8} height={16} rx={4} fill="#0b0b0f" stroke="rgba(255,255,255,0.1)" />
-                  <text x={cx} y={(y1 + y2) / 2 - 4} textAnchor="middle" fontSize={10} fill="rgba(198,255,61,0.85)" fontFamily="JetBrains Mono, monospace">
+                  <text x={cx} y={(y1 + y2) / 2 - 4} textAnchor="middle" fontSize={10} fill="rgba(255, 176, 32,0.85)" fontFamily="JetBrains Mono, monospace">
                     {e.label}
                   </text>
                 </g>

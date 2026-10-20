@@ -17,7 +17,7 @@ export function IntroCard() {
           <div key={s.label} className="rounded-2xl border border-border bg-surface px-4 py-3">
             <dt className="order-2 text-[11px] leading-tight text-text-tertiary">{s.label}</dt>
             <dd className="font-display text-3xl font-bold text-text">
-              <Counter value={s.value} suffix={s.suffix ?? ''} />
+              <Counter value={s.value} prefix={'prefix' in s ? s.prefix : ''} suffix={'suffix' in s ? s.suffix : ''} />
             </dd>
           </div>
         ))}

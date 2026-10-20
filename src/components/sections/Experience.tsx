@@ -67,7 +67,7 @@ export function Experience() {
               <li key={job.company} data-role className="group relative grid gap-4 pl-8 md:grid-cols-2 md:gap-12 md:pl-0">
                 <span
                   aria-hidden
-                  className="absolute left-0 top-2 size-[15px] rounded-full border-2 border-border bg-bg transition-[border-color,box-shadow] duration-500 group-[.is-lit]:border-accent group-[.is-lit]:shadow-[0_0_0_4px_rgba(198,255,61,0.2)] md:left-1/2 md:-translate-x-1/2"
+                  className="absolute left-0 top-2 size-[15px] rounded-full border-2 border-border bg-bg transition-[border-color,box-shadow] duration-500 group-[.is-lit]:border-accent group-[.is-lit]:shadow-[0_0_0_4px_rgba(255, 176, 32,0.2)] md:left-1/2 md:-translate-x-1/2"
                 />
                 <div className={cn('md:text-right', left ? 'md:order-1 md:pr-12' : 'md:order-2 md:pl-12 md:text-left')}>
                   <p className="label-mono text-accent">{job.period}</p>

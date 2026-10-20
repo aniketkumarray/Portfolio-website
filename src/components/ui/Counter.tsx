@@ -4,12 +4,13 @@ import { useReducedMotion } from '@/hooks/useReducedMotion'
 
 interface Props {
   value: number
+  prefix?: string
   suffix?: string
   duration?: number
   className?: string
 }
 
-export function Counter({ value, suffix = '', duration = 1.4, className }: Props) {
+export function Counter({ value, prefix = '', suffix = '', duration = 1.4, className }: Props) {
   const { ref, inView } = useInView<HTMLSpanElement>({ threshold: 0.6 })
   const reduced = useReducedMotion()
   const [display, setDisplay] = useState(reduced ? value : 0)
@@ -30,6 +31,7 @@ export function Counter({ value, suffix = '', duration = 1.4, className }: Props
 
   return (
     <span ref={ref} className={className}>
+      {prefix}
       {display}
       {suffix}
     </span>

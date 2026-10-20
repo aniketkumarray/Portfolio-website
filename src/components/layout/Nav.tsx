@@ -99,8 +99,8 @@ export function Nav() {
         <nav
           aria-label="Primary"
           className={cn(
-            'flex h-14 w-full max-w-[920px] items-center justify-between gap-2 rounded-full pl-5 pr-2 transition-[background-color,box-shadow,border-color] duration-500',
-            scrolled || !isHome ? 'glass' : 'border border-transparent',
+            'glass flex h-14 w-full max-w-[920px] items-center justify-between gap-2 rounded-full pl-5 pr-2 transition-[background-color,box-shadow,border-color] duration-500',
+            (scrolled || !isHome) && 'bg-bg-elevated/70 shadow-lg',
           )}
         >
           <Link

@@ -19,6 +19,8 @@ export const profile = {
   linkedin: 'https://www.linkedin.com/in/aniket-kumar-ray/',
   github: 'https://github.com/aniketkumarray',
   tableau: 'https://public.tableau.com/app/profile/aniket.kumar.ray',
+  instagram: 'https://www.instagram.com/rayclicks.1/',
+  instagramHandle: '@rayclicks.1',
   resumeUrl: '/Aniket_Kumar_Ray_Resume.pdf',
   siteUrl: import.meta.env.VITE_SITE_URL ?? 'https://aniketkumarray.vercel.app',
   availability: 'Open to opportunities',
@@ -29,9 +31,9 @@ export const profile = {
   ],
   stats: [
     { label: 'Years in product', value: 4, suffix: '+' },
-    { label: 'BRDs & change requests', value: 57 },
+    { label: 'Product documents', value: 209 },
     { label: 'Platforms owned', value: 6 },
-    { label: 'Monthly AI-graded submissions', value: 75, suffix: 'K' },
+    { label: 'Processed in payments', value: 40, prefix: '₹', suffix: ' Cr' },
   ],
   competencies: [
     'Product Strategy & Roadmapping',
@@ -60,7 +62,9 @@ export const experience: Experience[] = [
     summary: 'Product owner for Pulse (ERP/CRM), Wingz (LMS) and itvedant.com.',
     bullets: [
       'Own roadmap and delivery across three core platforms, converting business problems into prioritised requirements, Figma flows, acceptance criteria, UAT plans, releases and adoption support.',
-      'Authored 57 BRDs and change requests across learning, admissions, placement, HR, finance and support, partnering with business, design and engineering from discovery through demos, training and rollout.',
+      'Authored 209 product documents (55 BRDs, 136 change requests, RCAs and supporting specs) across learning, admissions, placement, HR, finance and support, partnering with business, design and engineering from discovery through demos, training and rollout.',
+      'Built payment and reimbursement systems from scratch that have processed 8,000+ requests worth over ₹40 Cr since March 2026, with approval chains, policy validation and reconciliation.',
+      'Designed an Employee Exit System, live since December 2025, that has handled 362 exits and met the Full & Final settlement deadline 94% of the time.',
       'Designed a human-in-the-loop AI Assignment Checker for ~75,000 monthly submissions with shadow-mode validation, confidence-based routing, trainer-review SLAs and learner appeals before any automatic rejection.',
       'Specified an auditable Resume Recommender (60% skill match / 15% resume quality / 25% 3A score) and cut LLM cost by limiting calls to on-demand job-skill extraction instead of per-candidate scoring.',
       'Defined Wingz RAG support with linked sources, no-answer fallbacks, ticket escalation and feedback capture; ran a 1–2 branch pilot with weekly accuracy, resolution and satisfaction reviews.',
@@ -122,19 +126,28 @@ export const certifications: Certification[] = [
 
 export const awards: Award[] = [
   {
+    title: 'Tech Catalyst — Winner',
+    issuer: 'Itvedant · Ignitive Annual Awards · FY 2025–26',
+    description: 'Recognised for driving AI-led product work across Wingz and Pulse: assignment evaluation, RAG support and sourcing automation.',
+    image: '/awards/tech-catalyst-fy25-26.webp',
+  },
+  {
+    title: 'Most Organised — Qualifier',
+    issuer: 'Itvedant · Ignitive Annual Awards · FY 2024–25',
+    description: 'Shortlisted for running the product operating system behind 209 shipped requirement and change documents.',
+    image: '/awards/most-organised-fy24-25.webp',
+  },
+  {
+    title: 'Exceeding Expectations — Winner',
+    issuer: 'Itvedant · Annual Awards · FY 2023–24',
+    description: 'Won for delivery across placement tracking, UPI reconciliation and HR / RBAC workflows in the first year.',
+    image: '/awards/exceeding-expectations-fy23-24.webp',
+  },
+  {
     title: 'Dashing Debut',
-    issuer: 'eClerx',
-    description: 'Recognised for fastest ramp-up and early ownership of middle-office exception workflows.',
-  },
-  {
-    title: 'Exceeding Expectations',
-    issuer: 'Akshat IT Solution',
-    description: 'Awarded for analytics work that cut billing errors by 27% across the EIZY customer base.',
-  },
-  {
-    title: 'Most Organised',
-    issuer: 'Itvedant',
-    description: 'Peer-voted for running the product operating system behind 57 shipped requirement documents.',
+    issuer: 'Itvedant · February 2024',
+    description: 'Awarded within the first weeks for the fastest ramp-up to product ownership on three live platforms.',
+    image: '/awards/dashing-debut-fy23-24.webp',
   },
 ]
 
@@ -215,16 +228,133 @@ export const tools = [
   { name: 'Antigravity', src: '/antigravity.webp' },
 ]
 
-export const wallpapers = [1, 2, 3, 4, 5, 6, 7].map((n) => `/wall${n}.webp`)
+/** Portraits of Aniket — cross-faded in the About profile card. */
+export const portraits = [
+  { src: '/portraits/portrait-1.webp', alt: 'Aniket in a black suit' },
+  { src: '/portraits/portrait-2.webp', alt: 'Aniket at a hill viewpoint' },
+  { src: '/portraits/portrait-3.webp', alt: 'Aniket with a BMW adventure motorcycle' },
+  { src: '/portraits/portrait-4.webp', alt: 'Aniket in a sherwani' },
+  { src: '/portraits/portrait-5.webp', alt: 'Aniket on a monsoon trek' },
+]
 
-export const music = {
-  title: 'Best of Me',
-  artist: 'NEFFEX',
-  src: '/NEFFEX_-_Best_of_Me_(mp3.pm).mp3',
-  art: '/songpic.webp',
-}
+/** Photography from instagram.com/rayclicks.1 — shown in the About "Through my lens" card. */
+export const photos = [
+  { src: '/photos/ig11.webp', alt: 'Hawa Mahal lit up at night, Jaipur' },
+  { src: '/photos/ig01.webp', alt: 'Macro of a marigold, Varanasi' },
+  { src: '/photos/ig12.webp', alt: 'City Palace mirrored in still water, Jaipur' },
+  { src: '/photos/ig03.webp', alt: 'Ganga ghats at night from a boat' },
+  { src: '/photos/ig04.webp', alt: 'Evening Ganga aarti under lit umbrellas' },
+  { src: '/photos/ig13.webp', alt: 'Panna Meena ka Kund stepwell, Jaipur' },
+  { src: '/photos/ig02.webp', alt: 'Looking up between Mumbai towers' },
+  { src: '/photos/ig09.webp', alt: 'Raindrop on a leaf' },
+  { src: '/photos/ig06.webp', alt: 'Fishing boats at dusk, Mumbai harbour' },
+  { src: '/photos/ig05.webp', alt: 'Temple complex under a wide sky' },
+  { src: '/photos/ig08.webp', alt: 'Forest path in evening light' },
+  { src: '/photos/ig07.webp', alt: 'Tiny-planet view of a tree canopy' },
+]
 
 export const projects: Project[] = [
+  {
+    slug: 'payment-reimbursement-system',
+    title: 'Payment & Reimbursement System',
+    kicker: '₹40+ Cr processed across 8,000+ requests',
+    summary:
+      'A from-scratch expense and reimbursement platform with policy validation, multi-step approvals and reconciliation — processing real money at scale since March 2026.',
+    category: 'Platforms',
+    featured: true,
+    role: 'Product owner · built from scratch — requirements, approval design, reconciliation',
+    timeline: '2025 — Present',
+    context: 'Itvedant · Finance',
+    stack: ['Approval chains', 'Policy engine', 'SQL Server', 'Reconciliation', 'Figma', 'Jira'],
+    image: '/covers/payment-reimbursement-system.webp',
+    problem: [
+      'Expense claims and reimbursements were handled over email and spreadsheets, so approvals stalled, policy breaches slipped through, and finance had no reliable audit trail against real money.',
+      'Any system touching ₹40+ Cr of payouts has to be correct, traceable and policy-safe before it is fast.',
+    ],
+    approach: [
+      'Designed the request lifecycle end to end: submission, policy validation, multi-step approval chains by amount and category, payout and reconciliation.',
+      'Encoded expense policy as validation rules so out-of-policy claims are caught at entry instead of after payment.',
+      'Built reconciliation back to finance records so every rupee paid maps to an approved, auditable request.',
+      'Owned requirements, acceptance criteria, UAT and rollout with finance and engineering.',
+    ],
+    results: [
+      'Processed 8,000+ expense and reimbursement requests worth over ₹40 Cr since March 2026.',
+      'Replaced email-and-spreadsheet chaos with an auditable, policy-enforced pipeline finance can trust.',
+      'Gave approvers a clear queue and finance a reconciled, exportable record for every payout.',
+    ],
+    metrics: [
+      { value: '₹40+ Cr', label: 'processed to date' },
+      { value: '8,000+', label: 'requests handled' },
+      { value: '100%', label: 'policy-validated at entry' },
+    ],
+    architecture: {
+      nodes: [
+        { id: 'submit', label: 'Request', sub: 'expense / reimb.' },
+        { id: 'policy', label: 'Policy engine', sub: 'validation rules' },
+        { id: 'approve', label: 'Approval chain', sub: 'by amount / category' },
+        { id: 'payout', label: 'Payout' },
+        { id: 'recon', label: 'Reconciliation', sub: 'audit trail' },
+      ],
+      edges: [
+        { from: 'submit', to: 'policy' },
+        { from: 'policy', to: 'approve', label: 'in policy' },
+        { from: 'policy', to: 'submit', label: 'rejected' },
+        { from: 'approve', to: 'payout' },
+        { from: 'payout', to: 'recon' },
+      ],
+    },
+  },
+  {
+    slug: 'employee-exit-system',
+    title: 'Employee Exit System',
+    kicker: '362 exits, Full & Final on time 94% of the time',
+    summary:
+      'An end-to-end offboarding workflow — clearances, asset recovery and Full & Final settlement — that turned a deadline-prone manual process into a tracked, accountable one.',
+    category: 'Platforms',
+    featured: true,
+    role: 'Product owner · workflow design, SLAs, FNF tracking',
+    timeline: '2025 — Present',
+    context: 'Itvedant · HR & Finance',
+    stack: ['Workflow', 'RBAC', 'SLA tracking', 'SQL Server', 'Figma', 'Jira'],
+    image: '/covers/employee-exit-system.webp',
+    problem: [
+      'Offboarding ran across HR, IT, finance and managers with no shared tracker, so clearances slipped and Full & Final settlements routinely missed their statutory deadline.',
+      'A late FNF is a compliance and trust problem, not just an ops delay.',
+    ],
+    approach: [
+      'Mapped the exit journey into a single workflow: resignation, multi-department clearances, asset recovery and FNF settlement.',
+      'Assigned each stage an owner and SLA with role-based access, so nothing waits on an unclear hand-off.',
+      'Surfaced the FNF deadline as the system\'s headline metric, with visibility into what is blocking each pending exit.',
+    ],
+    results: [
+      'Live since December 2025, handling 362 exits through a single accountable pipeline.',
+      'Met the Full & Final settlement deadline 94% of the time — up from an unreliable manual baseline.',
+      'Gave HR and finance a real-time view of every exit and its blockers.',
+    ],
+    metrics: [
+      { value: '362', label: 'exits processed' },
+      { value: '94%', label: 'FNF deadline met' },
+      { value: 'Dec 2025', label: 'live in production' },
+    ],
+    architecture: {
+      nodes: [
+        { id: 'resign', label: 'Resignation', sub: 'initiated' },
+        { id: 'clear', label: 'Clearances', sub: 'HR · IT · finance' },
+        { id: 'asset', label: 'Asset recovery' },
+        { id: 'fnf', label: 'FNF settlement', sub: 'deadline-tracked' },
+        { id: 'sla', label: 'SLA + blockers', sub: 'owner per stage' },
+        { id: 'done', label: 'Exit complete' },
+      ],
+      edges: [
+        { from: 'resign', to: 'clear' },
+        { from: 'clear', to: 'asset' },
+        { from: 'asset', to: 'fnf' },
+        { from: 'sla', to: 'clear', label: 'tracks' },
+        { from: 'sla', to: 'fnf', label: 'tracks' },
+        { from: 'fnf', to: 'done' },
+      ],
+    },
+  },
   {
     slug: 'ai-assignment-checker',
     title: 'AI Assignment Checker',
@@ -237,7 +367,7 @@ export const projects: Project[] = [
     timeline: '2024 — 2025',
     context: 'Itvedant · Wingz LMS',
     stack: ['Gemini', 'OpenRouter', 'Confidence routing', 'PostHog', 'SQL Server', 'Figma'],
-    image: '/wall3.webp',
+    image: '/covers/ai-assignment-checker.webp',
     problem: [
       'Trainers were manually reviewing roughly 75,000 assignment submissions every month, creating multi-day feedback delays and inconsistent grading across 21 branches.',
       'A naive "let the model grade it" approach risked wrongly rejecting learners, which in an education product is a trust-destroying failure mode.',
@@ -291,7 +421,7 @@ export const projects: Project[] = [
     timeline: '2024',
     context: 'Itvedant · Pulse placement module',
     stack: ['Scoring model', 'LLM skill extraction', 'SQL Server', 'Figma', 'Jira'],
-    image: '/wall5.webp',
+    image: '/covers/resume-recommender.webp',
     problem: [
       'Placement coordinators were hand-matching thousands of learner resumes to incoming job descriptions, and employers could not understand why a candidate was recommended.',
       'Scoring every candidate with an LLM per job would have been slow, expensive and impossible to audit.',
@@ -341,7 +471,7 @@ export const projects: Project[] = [
     timeline: '2025',
     context: 'Itvedant · Wingz LMS',
     stack: ['RAG', 'AnythingLLM', 'Ticketing', 'Feedback capture', 'PostHog'],
-    image: '/wall2.webp',
+    image: '/covers/wingz-rag-support.webp',
     problem: [
       'Learners asked the same operational questions across branches, and the support team was the bottleneck between a question and a trustworthy answer.',
       'A chatbot that confidently hallucinated policy would have been worse than no chatbot.',
@@ -391,7 +521,7 @@ export const projects: Project[] = [
     timeline: '2025',
     context: 'Itvedant · Corporate Relations',
     stack: ['n8n', 'Apollo', 'SQL Server', 'Google Sheets', 'Pulse CRM'],
-    image: '/wall6.webp',
+    image: '/covers/job-sourcing-automation.webp',
     problem: [
       'Corporate Relations sourced employer leads manually and unevenly: some branches had surplus openings while others starved.',
       'Apollo credits were a hard constraint, so any automation had to be budget-aware from day one.',
@@ -490,7 +620,7 @@ export const projects: Project[] = [
     timeline: '2025 — 2026',
     context: 'Side build · live',
     stack: ['Next.js 16', 'React 19', 'Supabase SSR', 'Zod', 'Jitsi', 'Gemini', 'Web Speech API'],
-    image: '/wall1.webp',
+    image: '/covers/interview-peer.webp',
     liveUrl: 'https://interview-peer.vercel.app',
     repoUrl: 'https://github.com/aniketkumarray/Interview_peer',
     problem: [
@@ -590,7 +720,7 @@ export const projects: Project[] = [
     timeline: '2025',
     context: 'Open source',
     stack: ['RAG', 'Embeddings', 'Chunking', 'Prompt design', 'TypeScript'],
-    image: '/wall7.webp',
+    image: '/covers/rag-learning-lab.webp',
     repoUrl: 'https://github.com/aniketkumarray/rag_Simulation',
     problem: [
       'Stakeholders kept asking for "a chatbot on our docs" without understanding why chunk size or retrieval quality changes the answer.',

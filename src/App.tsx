@@ -14,6 +14,9 @@ import { Home } from '@/pages/Home'
 
 const CaseStudy = lazy(() => import('@/pages/CaseStudy').then((m) => ({ default: m.CaseStudy })))
 const NotFound = lazy(() => import('@/pages/NotFound').then((m) => ({ default: m.NotFound })))
+const Cover = import.meta.env.DEV
+  ? lazy(() => import('@/pages/Cover').then((m) => ({ default: m.Cover })))
+  : null
 
 const ease = [0.22, 1, 0.36, 1] as const
 
@@ -52,6 +55,7 @@ function Routed() {
           <Routes location={location}>
             <Route path="/" element={<Home />} />
             <Route path="/projects/:slug" element={<CaseStudy />} />
+            {Cover && <Route path="/__cover/:slug" element={<Cover />} />}
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>

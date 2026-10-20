@@ -5,7 +5,7 @@ import { useToast } from '@/components/ui/Toast'
 import { Button } from '@/components/ui/Button'
 import { TextReveal } from '@/components/ui/TextReveal'
 import { ContactForm } from './ContactForm'
-import { ArrowUpRight, Copy, Download, Eye, Github, Linkedin, Mail, Phone, Tableau } from '@/components/ui/Icons'
+import { ArrowUpRight, Copy, Download, Eye, Github, Instagram, Linkedin, Mail, Phone, Tableau } from '@/components/ui/Icons'
 
 export function Contact() {
   const { toast } = useToast()
@@ -83,6 +83,7 @@ export function Contact() {
               { href: profile.linkedin, label: 'LinkedIn', text: 'linkedin.com/in/aniket-kumar-ray', Icon: Linkedin },
               { href: profile.github, label: 'GitHub', text: 'github.com/aniketkumarray', Icon: Github },
               { href: profile.tableau, label: 'Tableau Public', text: 'public.tableau.com', Icon: Tableau },
+              { href: profile.instagram, label: 'Instagram', text: 'instagram.com/rayclicks.1', Icon: Instagram },
             ].map(({ href, label, text, Icon }) => (
               <li key={label} className="py-4">
                 <a href={href} target="_blank" rel="noreferrer" className="group flex items-center justify-between gap-4 text-text" title={label}>

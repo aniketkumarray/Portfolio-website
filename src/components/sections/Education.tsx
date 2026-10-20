@@ -69,12 +69,12 @@ export function Education() {
           </ul>
 
           <p className="label-mono mb-4 mt-10">Awards</p>
-          <ul className="grid gap-3 sm:grid-cols-3">
+          <ul className="grid gap-3 sm:grid-cols-2">
             {awards.map((a, i) => (
-              <li key={a.title} data-edu className="card overflow-hidden">
+              <li key={a.title} data-edu className="card group overflow-hidden">
                 {a.image && (
                   <div className="aspect-[4/3] overflow-hidden border-b border-border">
-                    <Img src={a.image} alt={`${a.title} award`} seed={i + 10} loading="lazy" width={400} height={300} className="h-full w-full object-cover" />
+                    <Img src={a.image} alt={`${a.title} award`} seed={i + 10} loading="lazy" width={600} height={450} className="h-full w-full object-cover object-top transition-transform duration-[1.2s] ease-out-expo group-hover:scale-[1.04]" />
                   </div>
                 )}
                 <div className="p-5">

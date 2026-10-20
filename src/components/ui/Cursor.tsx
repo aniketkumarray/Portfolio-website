@@ -37,7 +37,7 @@ export function Cursor() {
         scale: text ? 3.2 : interactive ? 1.8 : 1,
         duration: 0.4,
         ease: 'power3.out',
-        backgroundColor: text ? 'rgba(198,255,61,1)' : 'rgba(198,255,61,0)',
+        backgroundColor: text ? 'rgba(255, 176, 32,1)' : 'rgba(255, 176, 32,0)',
       })
       gsap.to(dot.current, { scale: interactive ? 0 : 1, duration: 0.3 })
     }

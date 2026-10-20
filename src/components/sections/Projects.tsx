@@ -56,7 +56,7 @@ function ProjectMedia({ p, className }: { p: Project; className?: string }) {
       {p.video ? (
         <LazyVideo src={p.video} poster={p.image} label={`${p.title} demo`} />
       ) : (
-        <Img src={p.image} alt={`${p.title} preview`} seed={p.title.length} loading="lazy" width={1280} height={720} className="h-full w-full object-cover transition-transform duration-[1.2s] ease-out-expo group-hover:scale-[1.04]" />
+        <Img src={p.image} alt={`${p.title} preview`} seed={p.title.length} loading="lazy" width={1280} height={720} className="h-full w-full object-cover object-[15%_center] transition-transform duration-[1.2s] ease-out-expo group-hover:scale-[1.04]" />
       )}
     </div>
   )

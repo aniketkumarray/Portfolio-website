@@ -36,7 +36,9 @@ If a frame set is missing the hero falls back to the poster image.
 Everything is in **`src/data/profile.ts`** — name, contact, about copy, stats, experience, education, certifications, awards, skills, tool logos, projects and nav links. Components never hard-code profile data.
 
 - **Projects / case studies:** add a slug to `src/data/slugs.ts` (used by the sitemap), then a matching entry in `projects`. Each project has `problem`, `approach`, `results`, `metrics` and an `architecture` graph (`nodes` + `edges`) that is rendered as an SVG diagram automatically.
-- **Awards with images:** set `image: '/awards/your-file.webp'` on an award to render a photo above the text.
+- **Awards with images:** set `image: '/awards/your-file.webp'` on an award to render a photo above the text. Two entries already point at `most-organised-fy24-25.webp` and `exceeding-expectations-fy23-24.webp` — drop those files into `public/awards/` to light them up.
+- **Photography ("Through my lens" card):** `photos` in `profile.ts`; files live in `public/photos/`.
+- **Project cover art:** internal projects with no public UI use generated covers in `public/covers/`. Regenerate by running `npm run dev`, opening `/__cover/<slug>` (dev-only route) and screenshotting the 1280×720 `#cover` element.
 - **Resume PDF:** replace `public/Aniket_Kumar_Ray_Resume.pdf`.
 - **Profile photo:** replace `source-assets/mine.jpg` and run `npm run assets -- --force`.
 

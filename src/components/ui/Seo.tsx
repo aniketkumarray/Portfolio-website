@@ -25,7 +25,7 @@ export function Seo({ title, description = DEFAULT_DESC, path = '/', image = '/o
     url: profile.siteUrl,
     email: `mailto:${profile.email}`,
     address: { '@type': 'PostalAddress', addressLocality: 'Mumbai', addressCountry: 'IN' },
-    sameAs: [profile.linkedin, profile.github, profile.tableau],
+    sameAs: [profile.linkedin, profile.github, profile.tableau, profile.instagram],
   }
   return (
     <Helmet>

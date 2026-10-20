@@ -67,6 +67,9 @@ export const Linkedin = (p: P) => (
     <path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29ZM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12ZM7.12 20.45H3.56V9h3.56v11.45ZM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0Z" />
   </svg>
 )
+export const Instagram = (p: P) => (
+  <svg viewBox="0 0 24 24" {...base} {...p}><rect x="3" y="3" width="18" height="18" rx="5" /><circle cx="12" cy="12" r="4" /><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" /></svg>
+)
 export const Tableau = (p: P) => (
   <svg viewBox="0 0 24 24" width={18} height={18} fill="currentColor" {...p}>
     <path d="M11.2 2h1.6v3.1h2.9v1.5h-2.9v3.1h-1.6V6.6H8.3V5.1h2.9V2Zm-6.5 4.2h1.2v2.3h2.2v1.2H5.9V12H4.7V9.7H2.5V8.5h2.2V6.2Zm12.4 0h1.2v2.3h2.2v1.2h-2.2V12h-1.2V9.7h-2.2V8.5h2.2V6.2ZM11 10.6h2v3.9h3.7v1.9H13v3.9h-2v-3.9H7.3v-1.9H11v-3.9Zm-6.3 6h1.2v2.3h2.2v1.2H5.9V22H4.7v-2.1H2.5v-1.2h2.2v-2.1Zm12.4 0h1.2v2.3h2.2v1.2h-2.2V22h-1.2v-2.1h-2.2v-1.2h2.2v-2.1Z" />

@@ -1,5 +1,7 @@
 // Kept dependency-free so vite.config.ts can import it for the sitemap.
 export const projectSlugs = [
+  'payment-reimbursement-system',
+  'employee-exit-system',
   'ai-assignment-checker',
   'resume-recommender',
   'wingz-rag-support',

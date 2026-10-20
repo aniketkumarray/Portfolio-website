@@ -6,3 +6,6 @@ dist-ssr
 .DS_Store
 *.tsbuildinfo
 dist/stats.html
+
+# Heavy source originals — not needed for the hosted build
+source-assets/

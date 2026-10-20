@@ -1,7 +1,7 @@
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { navLinks, profile } from '@/data/profile'
 import { useScrollTo } from '@/hooks/useLenis'
-import { ArrowUp, Github, Linkedin, Mail, Tableau } from '@/components/ui/Icons'
+import { ArrowUp, Github, Instagram, Linkedin, Mail, Tableau } from '@/components/ui/Icons'
 
 export function Footer() {
   const scrollTo = useScrollTo()
@@ -25,6 +25,7 @@ export function Footer() {
               { href: profile.linkedin, label: 'LinkedIn', Icon: Linkedin },
               { href: profile.github, label: 'GitHub', Icon: Github },
               { href: profile.tableau, label: 'Tableau Public', Icon: Tableau },
+              { href: profile.instagram, label: 'Instagram (photography)', Icon: Instagram },
               { href: `mailto:${profile.email}`, label: 'Email', Icon: Mail },
             ].map(({ href, label, Icon }) => (
               <li key={label}>
