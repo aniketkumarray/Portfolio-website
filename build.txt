@@ -1,0 +1,317 @@
+# Prompt: Build a Premium, Award-Level Developer Portfolio (Aniket Kumar Ray)
+
+You are a senior creative developer and product designer. Build a **production-grade personal portfolio** for **Aniket Kumar Ray** that feels like a high-end agency build (Awwwards / Framer-showcase quality). It must look expensive, load fast, and convert visitors (recruiters, founders, clients) into conversations.
+
+Do not ship a template look. Every section needs a deliberate design decision, polished motion, and real content.
+
+Refer the Resume for creating or changing the below sections if needed, also refer other projects for context in AI Projects folder
+
+---
+
+## 0. Quality Bar (read first)
+
+- **Design reference tone:** dark, cinematic, editorial. Think confident typography, generous whitespace, restrained accent color, subtle glass and depth. No generic gradient-blob "AI" aesthetic.
+- **Performance targets:** Lighthouse 95+ on Performance, Accessibility, Best Practices, SEO (desktop); 90+ mobile. LCP < 2.0s, CLS < 0.05, INP < 200ms.
+- **Zero placeholder content** in the final build. Use the profile data block below; if a field is still `TODO`, render a tasteful fallback and list it in the final report.
+- **No lorem ipsum, no stock "Welcome to my portfolio" copy.** Write sharp, specific, first-person microcopy.
+- Every interactive element has hover, focus-visible, and active states.
+
+---
+
+## 1. Profile Data (single source of truth)
+
+Store everything in `src/data/profile.ts` so content can be edited without touching components.
+
+> **Note:** LinkedIn blocks automated access, so it could not be scraped. Fill the `TODO` fields below from your LinkedIn profile (https://www.linkedin.com/in/aniket-kumar-ray/) before running the prompt. Copy-paste sections from LinkedIn directly into this block.
+
+```ts
+export const profile = {
+  name: "Aniket Kumar Ray",
+  role: "AI/ML Engineer",                  // TODO confirm headline from LinkedIn
+  tagline: "TODO: one-line value proposition, e.g. 'I build ML systems that ship.'",
+  location: "TODO",
+  email: "TODO",
+  linkedin: "https://www.linkedin.com/in/aniket-kumar-ray/",
+  github: "TODO",
+  resumeUrl: "/Aniket_Kumar_Ray_Resume.pdf",
+  about: "TODO: 3-4 sentence summary from LinkedIn About",
+  stats: [                                  // animated counters in About
+    { label: "Projects shipped", value: 0 },       // TODO
+    { label: "Years experience", value: 0 },       // TODO
+    { label: "Technologies", value: 0 },           // TODO
+  ],
+  experience: [
+    // { company, role, period, location, bullets: [impact-first, quantified], stack: [] }
+  ],
+  education: [
+    // { school, degree, period, highlights: [] }
+  ],
+  projects: [
+    // { title, summary, problem, solution, impact, stack: [], image, video?, liveUrl?, repoUrl?, featured: boolean }
+  ],
+  skills: {
+    ml: [],        // e.g. PyTorch, TensorFlow, scikit-learn, LLMs, RAG
+    languages: [], // e.g. Python, TypeScript
+    tools: [],     // e.g. Docker, Git, FastAPI
+    web: [],       // e.g. React, Next.js
+  },
+  certifications: [],
+  testimonials: [],   // optional; omit section if empty
+};
+```
+
+**Content rules:** rewrite experience bullets as *impact-first, quantified* statements (action + metric + outcome). Keep project case studies to Problem, Approach, Result.
+
+---
+
+## 2. Tech Stack
+
+- **React 18 + Vite + TypeScript (strict)**
+- **Tailwind CSS v3/v4** with a custom design-token layer (CSS variables for color, radius, shadow, spacing)
+- **GSAP + ScrollTrigger** (scroll storytelling, frame sequence, pinning)
+- **Framer Motion** (component-level transitions, layout animations, page transitions)
+- **Lenis** (smooth scroll, synced with ScrollTrigger)
+- **React Router** (home + `/projects/:slug` case-study pages) with animated route transitions
+- **react-helmet-async** (per-route SEO), **vite-plugin-sitemap**
+- **Optional WebGL accent:** one tasteful `@react-three/fiber` or OGL shader element (e.g. subtle grain/noise or particle field) in the hero or contact section. Lazy-loaded, disabled on low-power devices and `prefers-reduced-motion`.
+- ESLint + Prettier, Vitest for utilities, Playwright smoke test (optional)
+
+---
+
+## 3. Design System
+
+**Color (dark-first):**
+- Background `#050507`, surface `rgba(255,255,255,0.04)`, border `rgba(255,255,255,0.08)`
+- Text primary `#F5F5F7`, secondary `rgba(245,245,247,0.62)`
+- One signature accent (pick one and commit: electric blue `#4C7DFF`, acid lime `#C6FF3D`, or violet `#8B5CF6`) plus a soft glow variant. Use accent sparingly: CTAs, active states, key numbers.
+
+**Typography:**
+- Display: **Syne** (or Clash Display from Fontshare) with tight tracking and fluid `clamp()` sizing
+- Body: **Satoshi** (Fontshare), 16-18px, 1.6 line height
+- Mono accent: **JetBrains Mono** for labels, tags, and index numbers (`01 / About`)
+- Self-host fonts with `font-display: swap` and preload the display weight
+
+**Components:** glass cards (`backdrop-blur`, 1px inner border, soft shadow, accent glow on hover), magnetic buttons, animated underline links, pill tags, section index labels.
+
+**Global details that signal quality:**
+- Custom cursor (small dot + trailing ring that grows on interactive elements; hidden on touch)
+- Subtle film grain overlay (fixed, 3-4% opacity)
+- Scroll progress bar at the top
+- Preloader with name reveal that doubles as the hero frame preload (see Section 4)
+- Text reveal animations (split lines/words, masked slide-up) on all major headings
+- Consistent 8px spacing grid, max content width 1280px
+
+---
+
+## 4. Pre-requisite: Frame Generation (Hero)
+
+The `public` folder contains `hero-video.mp4`. Convert it to WebP frames **before building**:
+
+```bash
+mkdir -p public/frames
+ffmpeg -i public/hero-video.mp4 -vf "scale=1920:1080" -c:v libwebp -quality 80 -compression_level 6 -start_number 1 public/frames/frame_%04d.webp
+ffmpeg -i public/frames/frame_0001.webp -vf "scale=1280:-1" -quality 70 public/video-poster.webp
+```
+
+Also generate a **mobile set** (`public/frames-mobile/`, 960x540 or 720x1280 depending on the source, quality 70) and serve it on viewports < 768px.
+
+---
+
+## 5. Assets in `/public`
+
+```
+/hero-video.mp4                 (source for frames)
+/frames/frame_0001.webp ...     (desktop sequence)
+/frames-mobile/frame_0001.webp  (mobile sequence)
+/video-poster.webp
+/mine_pic.webp                  (profile photo)
+/songpic.webp                   (album art)
+/carchase.mp4                   (looping bento video)
+/NEFFEX_-_Best_of_Me_(mp3.pm).mp3
+/wall1.webp ... wall7.webp
+/framer_logo_icon_169149.webp, /spline_logo.webp, /antigravity.webp, /ollama-icon.webp, /groq_logo.webp
+/Aniket_Kumar_Ray_Resume.pdf
+/og-image.png                   (1200x630, generate from hero poster + name)
+/favicon.svg, /apple-touch-icon.png
+Moneymap-demo  - project video
+task-tracker-demo  - project video
+GitHub link - https://github.com/aniketkumarray
+```
+
+Missing assets must degrade gracefully (no broken images; use blurred gradient fallbacks).
+
+---
+
+## 6. Page Structure and Sections
+
+Order: **Preloader → Nav → Hero → About (Bento) → Experience → Projects → Skills → Education/Certs → Contact → Footer**
+
+### 6.1 Navigation
+- Floating pill nav (glass), centered on desktop, hides on scroll down and reappears on scroll up
+- Active-section highlighting via IntersectionObserver
+- Mobile: full-screen overlay menu with staggered link reveal
+- Persistent "Hire me" / "Download CV" CTA
+
+### 6.2 Hero (Fullscreen Scroll-Triggered Frame Sequence)
+- Container height `800vh`; inner sticky `100vh` canvas
+- GSAP ScrollTrigger scrubs through WebP frames drawn on a `<canvas>` (use `devicePixelRatio`-aware sizing and cover-fit drawing)
+- **Progressive loading:** load first 30 frames immediately; when done, fade out poster and unlock scroll; load the rest in background batches of 30 using `requestIdleCallback` fallback to `setTimeout`. Use `createImageBitmap` where supported. Cap in-memory decoded frames sensibly on mobile.
+- Ignore height-only resize events on mobile (address-bar toggle)
+- Overlays: global `bg-black/10`, vignette `radial-gradient(circle, transparent 50%, rgba(0,0,0,0.4) 100%)`, bottom gradient `from-black/40`; canvas container `filter: saturate(1.25)`
+- **Scroll-driven text choreography:** the headline, subline and stats appear/disappear at defined scroll progress marks (e.g. 0-15%, 40-60%, 85-100%) instead of sitting static
+- Top-right: LinkedIn, GitHub, Email (vertical stack, magnetic hover)
+- Bottom-left: huge "AI/ML Engineer" title with word-mask reveal
+- Bottom-right: one-line pitch + animated scroll cue (mouse on mobile, arrow on desktop)
+- `prefers-reduced-motion`: show the static poster and a normal-scroll layout; no scrubbing
+- Frame URLs append `?v=1` for cache-busting
+
+### 6.3 About: Bento Grid (12-column CSS Grid)
+
+```
+Row 1-2: [Wallpaper Gallery 5col] [Intro Card 7col]
+Row 3:   [Tools Marquee 6col] [Profile Picture 2col] [Video Card 4col]
+Row 4:   [Music Player 6col] [Profile cont.] [Video cont.]
+```
+Use only `col-span` / `row-span`. **No negative margins.** Mobile stacks vertically with tuned heights.
+
+1. **Wallpaper Gallery (5x2):** infinite horizontal slide (`animate-slide-horizontal`), 7 images duplicated for a seamless loop, top/bottom gradient fade, pause on hover.
+2. **Intro Card (7x2):** "Hi, I'm Aniket" + 2-3 sentence bio from `profile.about`, animated stat counters, message form (input + send). Validate input, show a sliding success message from the left, and wire submission to a real endpoint (Formspree/Resend/EmailJS via env var) with loading and error states.
+3. **Tools Marquee (6x1):** logos scrolling via `animate-marquee`, mix of CDN and local logos, `invert` filter for dark logos (Ollama, GitHub, Unreal Engine). Add logos relevant to AI/ML (PyTorch, TensorFlow, Hugging Face, Python, Docker).
+4. **Profile Picture (2x2):** `object-cover`, dark overlay and vignette, gradient reveal on hover, subtle parallax tilt on pointer move.
+5. **Video Card (4x2):** autoplay, loop, muted `carchase.mp4` with `playsinline`; mute/unmute toggle (bottom-right); lazy-load and pause when off-screen via IntersectionObserver.
+6. **Music Player (6x1):** album art with blurred background, title/artist, 12-20 animated bars (staggered CSS animations), play/pause toggle. Audio never autoplays; bars animate only while playing; pause when the tab is hidden.
+
+**Card styling:** `bg-white/5 backdrop-blur-md border border-white/10 rounded-3xl shadow-lg hover:shadow-[accent]/20`. Entry: `ScrollTrigger.batch()` fade-up with stagger; set initial `opacity: 0` via `gsap.set()` first.
+
+### 6.4 Experience
+- Vertical timeline with a scroll-drawn line (SVG stroke or scaleY) and nodes that light up as they enter
+- Each role: company, title, period, 3-4 impact bullets, stack pills
+- Expandable details with Framer Motion `AnimatePresence`
+
+### 6.5 Projects (the money section)
+- **Featured projects** as large, sticky stacking cards (each card pins and scales down as the next slides over), with image/video preview, one-line impact, stack tags, and "View case study" link
+- Hover: cursor changes to "View", media zooms slightly, accent glow
+- Filter chips (All / ML / LLM / Web / Research) with animated layout transitions
+- **Case-study pages** (`/projects/:slug`): hero media, role/timeline/stack meta, Problem, Approach, Architecture diagram (SVG), Results with metrics, links, next-project footer
+- Include live demo and GitHub buttons where available
+
+### 6.6 Skills
+- Grouped capability cards (ML, Languages, Tools, Web) with animated proficiency indicators or an interactive tag cloud with hover detail; avoid fake percentage bars. Prefer "Daily / Comfortable / Familiar" levels.
+
+### 6.7 Education and Certifications
+- Compact timeline cards; certification badges with issuer and year, linking to credentials where available.
+
+### 6.8 Contact
+- Oversized heading ("Let's build something remarkable.") with a magnetic CTA
+- Email (click to copy with toast), LinkedIn, GitHub, resume download
+- Working contact form (same endpoint as the bento form, shared component), with spam protection (honeypot)
+- Local time display and availability status chip ("Open to opportunities")
+
+### 6.9 Footer
+- Minimal: name, nav links, socials, "Back to top", year, small "Built with" note
+
+---
+
+## 7. Motion Principles
+
+- Easing: `power3.out` / `cubic-bezier(0.22, 1, 0.36, 1)`; durations 0.6-1.2s; stagger 0.06-0.12s
+- Motion has meaning (guides attention, shows hierarchy); no gratuitous spinning or bouncing
+- Never animate layout properties that cause reflow in scroll handlers; prefer `transform` and `opacity`
+- Respect `prefers-reduced-motion` globally (a single hook/context)
+- Clean up every ScrollTrigger and listener on unmount (`gsap.context()` + `ctx.revert()`)
+
+---
+
+## 8. Smooth Scroll and Sync
+
+- Lenis initialized at App level
+- `lenis.on('scroll', ScrollTrigger.update)`; `gsap.ticker.add((t) => lenis.raf(t * 1000))`; `gsap.ticker.lagSmoothing(0)`
+- Anchor links scroll via `lenis.scrollTo`
+- Call `ScrollTrigger.refresh()` after fonts and the first frame batch load
+- Disable smooth scroll if reduced motion is requested
+
+---
+
+## 9. Performance Engineering
+
+- Code-split routes and heavy sections (`React.lazy`); lazy-load the WebGL element and the music player
+- Images: responsive `srcset`, explicit `width`/`height`, `loading="lazy"` below the fold, `fetchpriority="high"` on the poster
+- Videos: compressed H.264 (+ optional WebM), poster frames, `preload="metadata"`
+- Preload critical fonts and the first frame batch; self-host fonts
+- Cache headers guidance for `/frames/*` (immutable) in the deploy config
+- Bundle budget: initial JS < 200KB gzip excluding the hero frames; analyze with `rollup-plugin-visualizer`
+- Use `will-change` only during active animation
+
+---
+
+## 10. SEO, Accessibility, and Trust Signals
+
+- Unique `<title>` and meta description per route; Open Graph and Twitter cards with `og-image.png`
+- JSON-LD `Person` schema (name, jobTitle, url, sameAs: LinkedIn/GitHub)
+- `sitemap.xml`, `robots.txt`, canonical URLs, `lang="en"`
+- Semantic landmarks (`header`, `nav`, `main`, `section` with `aria-labelledby`, `footer`), skip-to-content link
+- Color contrast WCAG AA, visible focus rings, keyboard-operable nav/menu/forms, alt text on all images, `aria-label` on icon buttons, `aria-live` for form status
+- Canvas hero has a text alternative and the title remains real DOM text (not baked into frames)
+- Analytics (Plausible or Vercel Analytics, privacy-friendly) behind an env flag
+
+---
+
+## 11. Responsive Behavior
+
+- Breakpoints: 360, 768, 1024, 1440, 1920+; test at each
+- Mobile: single column, centered hero text, smaller fonts, touch-friendly 44px targets, no custom cursor, lighter frame set, reduced blur radii for performance
+- Desktop: flex/grid layouts with `justify-between`, pointer-driven micro-interactions
+
+---
+
+## 12. Required CSS (index.css)
+
+```css
+@keyframes slide-horizontal { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+.animate-slide-horizontal { animation: slide-horizontal 30s linear infinite; }
+
+@keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+.animate-marquee { animation: marquee 20s linear infinite; }
+
+@keyframes music-bar-1 { 0%,100%{height:4px} 50%{height:20px} }
+@keyframes music-bar-2 { 0%,100%{height:8px} 50%{height:28px} }
+@keyframes music-bar-3 { 0%,100%{height:12px} 50%{height:24px} }
+.animate-music-bar-1 { animation: music-bar-1 0.6s ease-in-out infinite; }
+.animate-music-bar-2 { animation: music-bar-2 0.7s ease-in-out infinite; }
+.animate-music-bar-3 { animation: music-bar-3 0.5s ease-in-out infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+}
+```
+
+---
+
+## 13. Project Structure
+
+```
+src/
+  components/   (ui/, layout/, sections/, bento/, hero/)
+  data/profile.ts
+  hooks/        (useReducedMotion, useLenis, useFramePreloader, useMagnetic)
+  lib/          (gsap.ts register plugins once, utils.ts)
+  pages/        (Home.tsx, CaseStudy.tsx, NotFound.tsx)
+  styles/       (tokens.css, index.css)
+```
+Include a styled 404 page, an `.env.example` (form endpoint, analytics ID), and a README with setup, FFmpeg steps, content-editing guide, and deploy instructions (Vercel/Netlify).
+
+---
+
+## 14. Acceptance Checklist (verify before finishing)
+
+- [ ] FFmpeg frames exist; hero scrubs smoothly at 60fps on a mid-range laptop and does not stutter on mobile
+- [ ] Poster fades out only after the first 30 frames load; remaining frames load in the background without freezing the UI
+- [ ] No negative margins anywhere; bento grid is responsive via `col-span`/`row-span`
+- [ ] `ScrollTrigger.batch()` entry animations work under fast scrolling; no FOUC or black flashes
+- [ ] All `TODO` profile fields are either filled or listed in a final "needs your input" report
+- [ ] Contact form works end-to-end (success, error, loading states)
+- [ ] Lighthouse targets met; reduced-motion and keyboard navigation verified
+- [ ] `npm run build` passes with zero TypeScript or ESLint errors
+- [ ] Final report lists: what was built, performance scores, and any assumptions made
+
+Build it in stages (tokens and layout → hero → bento → remaining sections → case pages → polish and QA), and share a short summary after each stage.
