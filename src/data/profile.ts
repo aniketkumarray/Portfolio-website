@@ -1,4 +1,4 @@
-import type { Award, Certification, Education, Experience, Project, Skill } from './types'
+import type { Award, Certification, Education, Experience, Project, Skill, Stat } from './types'
 
 /**
  * Single source of truth for all site content.
@@ -25,16 +25,14 @@ export const profile = {
   siteUrl: import.meta.env.VITE_SITE_URL ?? 'https://aniketkumarray.vercel.app',
   availability: 'Open to opportunities',
   about: [
-    "I'm a Product Manager with 4+ years of product ownership across ERP, LMS, CRM and SaaS platforms. I own the full loop: customer and stakeholder research, roadmaps, PRDs, prioritisation, delivery, UAT, launch and measurement.",
-    'At Itvedant I have authored 57 product requirements and change documents, with recent work spanning AI evaluation, RAG support, candidate matching and workflow automation.',
-    'I pair product judgment with SQL/Tableau analytics, cost-aware AI design and hands-on prototyping in Next.js and Supabase, so I can test an idea before I ask an engineering team to build it.',
+    "I'm a Product Manager with 4+ years of product ownership across ERP, LMS, CRM and SaaS platforms. I own the full product lifecycle: discovery, roadmaps, PRDs/BRDs, backlog prioritisation, Agile delivery, UAT and measurement.",
+    'I combine product strategy with hands-on technical execution — leading the data analytics team, building SQL/Tableau insights, and prototyping rapidly using Lovable, Claude Code and Codex to test concepts and ship production-ready ideas faster.',
   ],
   stats: [
     { label: 'Years in product', value: 4, suffix: '+' },
-    { label: 'Product documents', value: 209 },
+    { label: 'Product documents', value: 209, suffix: '+' },
     { label: 'Platforms owned', value: 6 },
-    { label: 'Processed in payments', value: 40, prefix: '₹', suffix: ' Cr' },
-  ],
+  ] as Stat[],
   competencies: [
     'Product Strategy & Roadmapping',
     'Discovery & User Research',

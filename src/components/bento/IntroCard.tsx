@@ -9,10 +9,13 @@ export function IntroCard() {
       <h3 className="display-md mt-3 text-text">
         Hi, I'm {profile.firstName}<span className="text-accent">.</span>
       </h3>
-      <p className="mt-4 max-w-2xl text-base text-text-secondary md:text-[1.0625rem]">{profile.about[0]}</p>
-      <p className="mt-3 max-w-2xl text-base text-text-secondary md:text-[1.0625rem]">{profile.about[2]}</p>
+      {profile.about.map((paragraph, i) => (
+        <p key={i} className={i === 0 ? 'mt-4 max-w-2xl text-base text-text-secondary md:text-[1.0625rem]' : 'mt-3 max-w-2xl text-base text-text-secondary md:text-[1.0625rem]'}>
+          {paragraph}
+        </p>
+      ))}
 
-      <dl className="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-4">
+      <dl className="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-3">
         {profile.stats.map((s) => (
           <div key={s.label} className="rounded-2xl border border-border bg-surface px-4 py-3">
             <dt className="order-2 text-[11px] leading-tight text-text-tertiary">{s.label}</dt>

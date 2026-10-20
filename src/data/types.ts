@@ -2,6 +2,13 @@ import type { ProjectSlug } from './slugs'
 
 export type Proficiency = 'Daily' | 'Comfortable' | 'Familiar'
 
+export interface Stat {
+  label: string
+  value: number
+  prefix?: string
+  suffix?: string
+}
+
 export interface Skill {
   name: string
   level: Proficiency

@@ -255,39 +255,40 @@ export function Hero({ onProgress, onReady, started }: HeroProps) {
           <p className="mt-3 max-w-md text-base text-text-secondary md:text-lg">Keep scrolling for the work.</p>
         </div>
 
-        {/* Bottom-left title */}
-        <div ref={textRefs.title} className="absolute inset-x-0 bottom-28 z-10 px-6 text-center md:bottom-10 md:left-10 md:right-auto md:px-0 md:text-left">
-          <TextReveal
-            as="h1"
-            id="hero-title"
-            text={profile.role}
-            mode="words"
-            immediate
-            enabled={started}
-            delay={0.2}
-            stagger={0.12}
-            className="display-xl justify-center text-text md:justify-start"
-          />
-          <p className="label-mono mt-4">AI Products · B2B / B2C SaaS</p>
-        </div>
+        {/* Bottom row: title (left) + pitch & cue (right) — flex keeps them from colliding */}
+        <div className="absolute inset-x-0 bottom-8 z-10 flex flex-col items-center gap-8 px-6 md:bottom-10 md:flex-row md:items-end md:justify-between md:gap-12 md:px-10">
+          <div ref={textRefs.title} className="min-w-0 text-center md:text-left">
+            <TextReveal
+              as="h1"
+              id="hero-title"
+              text={profile.role}
+              mode="words"
+              immediate
+              enabled={started}
+              delay={0.2}
+              stagger={0.12}
+              className="display-xl justify-center text-text md:justify-start"
+            />
+            <p className="label-mono mt-4">AI Products · B2B / B2C SaaS</p>
+          </div>
 
-        {/* Bottom-right pitch + cue */}
-        <div ref={textRefs.cue} className="absolute inset-x-0 bottom-8 z-10 flex flex-col items-center gap-4 px-6 md:bottom-10 md:right-10 md:left-auto md:items-end md:px-0">
-          <p className="hidden max-w-xs text-right text-sm text-text-secondary lg:block">{profile.pitch}</p>
-          <button
-            type="button"
-            onClick={() => scrollTo('#about', -24)}
-            className="group flex items-center gap-3 text-xs text-text-secondary transition-colors hover:text-text"
-            aria-label="Scroll to about section"
-          >
-            <span className="label-mono hidden md:inline">Scroll</span>
-            <span className="relative grid h-10 w-6 place-items-center overflow-hidden rounded-full border border-white/25 md:hidden">
-              <span className="animate-scroll-cue block h-2 w-1 rounded-full bg-accent" />
-            </span>
-            <span className="hidden size-10 place-items-center rounded-full border border-white/25 transition-colors group-hover:border-accent md:grid">
-              <ArrowDown className="animate-scroll-cue" />
-            </span>
-          </button>
+          <div ref={textRefs.cue} className="flex shrink-0 flex-col items-center gap-4 md:items-end">
+            <p className="hidden max-w-xs text-right text-sm text-text-secondary lg:block">{profile.pitch}</p>
+            <button
+              type="button"
+              onClick={() => scrollTo('#about', -24)}
+              className="group flex items-center gap-3 text-xs text-text-secondary transition-colors hover:text-text"
+              aria-label="Scroll to about section"
+            >
+              <span className="label-mono hidden md:inline">Scroll</span>
+              <span className="relative grid h-10 w-6 place-items-center overflow-hidden rounded-full border border-white/25 md:hidden">
+                <span className="animate-scroll-cue block h-2 w-1 rounded-full bg-accent" />
+              </span>
+              <span className="hidden size-10 place-items-center rounded-full border border-white/25 transition-colors group-hover:border-accent md:grid">
+                <ArrowDown className="animate-scroll-cue" />
+              </span>
+            </button>
+          </div>
         </div>
       </div>
     </section>
