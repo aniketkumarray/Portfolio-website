@@ -2,6 +2,7 @@
 export const projectSlugs = [
   'payment-reimbursement-system',
   'employee-exit-system',
+  'ai-voice-agent',
   'ai-assignment-checker',
   'resume-recommender',
   'wingz-rag-support',
