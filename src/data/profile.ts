@@ -21,6 +21,7 @@ export const profile = {
   tableau: 'https://public.tableau.com/app/profile/aniket.kumar.ray',
   instagram: 'https://www.instagram.com/rayclicks.1/',
   instagramHandle: '@rayclicks.1',
+  instagramBio: 'I shoot Street, Nature, Macro and occasionally Portraits.',
   resumeUrl: '/Aniket_Kumar_Ray_Resume.pdf',
   siteUrl: import.meta.env.VITE_SITE_URL ?? 'https://aniketkumarray.vercel.app',
   availability: 'Open to opportunities',

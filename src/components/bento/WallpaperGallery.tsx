@@ -28,7 +28,7 @@ export function WallpaperGallery() {
           <Instagram className="text-text-secondary" />
           <span>
             <span className="font-medium">{profile.instagramHandle}</span>
-            <span className="text-text-secondary"> · I shoot street, travel and the occasional pigeon.</span>
+            <span className="text-text-secondary"> · {profile.instagramBio}</span>
           </span>
         </span>
         <span className="grid size-8 shrink-0 place-items-center rounded-full border border-border bg-bg/60 backdrop-blur transition-colors group-hover:border-accent group-hover:text-accent">
