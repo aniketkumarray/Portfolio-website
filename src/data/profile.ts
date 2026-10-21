@@ -29,6 +29,7 @@ export const profile = {
     'I combine product strategy with hands-on technical execution — leading the data analytics team, building SQL/Tableau insights, and prototyping rapidly using Lovable, Claude Code and Codex to test concepts and ship production-ready ideas faster.',
   ],
   stats: [
+    { label: 'Years experience', value: 5, suffix: '+' },
     { label: 'Years in product', value: 4, suffix: '+' },
     { label: 'Product documents', value: 209, suffix: '+' },
     { label: 'Platforms owned', value: 6 },

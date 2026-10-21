@@ -10,11 +10,16 @@ export interface ContactPayload {
   message: string
   /** Honeypot: must be empty. */
   company?: string
+  /** Where the message came from (hello card / contact section). */
+  source?: string
 }
 
 const ENDPOINT = import.meta.env.VITE_FORM_ENDPOINT as string | undefined
 
 export const formConfigured = Boolean(ENDPOINT)
+
+/** Google Apps Script web apps need a CORS-simple POST and can't return a readable response. */
+const isAppsScript = Boolean(ENDPOINT && /^https:\/\/script\.google\.com\//.test(ENDPOINT))
 
 export function useContactForm() {
   const [status, setStatus] = useState<FormStatus>('idle')
@@ -47,14 +52,39 @@ export function useContactForm() {
     }
 
     setStatus('loading')
+
+    if (isAppsScript) {
+      // Apps Script can't answer a preflight or expose its response, so send a
+      // CORS-simple text/plain POST and treat the opaque result as success.
+      try {
+        await fetch(ENDPOINT!, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify({
+            name: payload.name ?? '',
+            email: payload.email,
+            message: payload.message,
+            source: payload.source ?? '',
+          }),
+        })
+        setStatus('success')
+      } catch {
+        setError('Could not reach the form server. Please email me instead.')
+        setStatus('error')
+      }
+      return
+    }
+
     try {
-      const res = await fetch(ENDPOINT, {
+      const res = await fetch(ENDPOINT!, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
         body: JSON.stringify({
           name: payload.name,
           email: payload.email,
           message: payload.message,
+          source: payload.source,
           _subject: `Portfolio message from ${payload.name || payload.email}`,
         }),
       })

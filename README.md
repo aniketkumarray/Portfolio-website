@@ -49,7 +49,7 @@ Copy `.env.example` to `.env`:
 | Variable | Purpose |
 | --- | --- |
 | `VITE_SITE_URL` | Canonical URL for SEO tags and the sitemap |
-| `VITE_FORM_ENDPOINT` | Formspree (or compatible JSON) endpoint for both contact forms. Leave empty to fall back to a pre-filled `mailto:` |
+| `VITE_FORM_ENDPOINT` | Contact form backend. Point it at a Google Apps Script web app ([setup guide](docs/contact-form-google-sheet.md)) or a Formspree/JSON endpoint. Leave empty to fall back to a pre-filled `mailto:` |
 | `VITE_PLAUSIBLE_DOMAIN` | Enables Plausible analytics in production builds |
 
 ## Deploy

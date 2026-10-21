@@ -50,7 +50,7 @@ export function Experience() {
         index="02"
         label="Experience"
         id="experience-title"
-        title={'Four years of\nshipping decisions.'}
+        title={'Five years of\nshipping decisions.'}
         description="Three companies, six platforms, one operating principle: discovery before delivery, measurement after."
       />
 

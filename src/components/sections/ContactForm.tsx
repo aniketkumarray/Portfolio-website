@@ -24,13 +24,13 @@ export function ContactForm({ compact = false }: Props) {
     e.preventDefault()
     if (compact && step === 'message') {
       if (message.trim().length < 10) {
-        await submit({ email: '', message, company })
+        await submit({ email: '', message, company, source: compact ? 'hello card' : 'contact section' })
         return
       }
       setStep('email')
       return
     }
-    await submit({ name, email, message, company })
+    await submit({ name, email, message, company, source: compact ? 'hello card' : 'contact section' })
   }
 
   const inputBase =
