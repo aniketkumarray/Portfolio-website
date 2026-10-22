@@ -7,7 +7,7 @@
  *  - public/"Hero video.mp4"      -> source-assets/hero-video.mp4
  *  - public/mine.jpg              -> source-assets/mine.jpg, public/mine_pic.webp (1200px, q82)
  *  - public/carchase.mp4          -> source-assets/, public/carchase.mp4 (720p, crf 28, audio 96k)
- *  - public/*-demo.mp4            -> source-assets/, public/*-demo.mp4 (720p, crf 30, muted) + poster
+ *  - public/*-demo.mp4            -> source-assets/, public/*-demo.mp4 (720p, crf 30, audio 96k) + poster
  *  - public/og-image.png          (1200x630) from the hero poster
  */
 import { execFileSync } from 'node:child_process'
@@ -65,7 +65,7 @@ for (const name of ['moneymap-demo', 'task-tracker-demo']) {
   run([
     '-i', original,
     '-vf', 'scale=1280:-2', '-c:v', 'libx264', '-preset', 'slow', '-crf', '30', '-pix_fmt', 'yuv420p',
-    '-an', '-movflags', '+faststart', resolve(pub, `${name}.mp4`),
+    '-c:a', 'aac', '-b:a', '96k', '-movflags', '+faststart', resolve(pub, `${name}.mp4`),
   ])
   run(['-ss', '2', '-i', original, '-frames:v', '1', '-vf', 'scale=1280:-1', '-quality', '75', resolve(pub, `${name}-poster.webp`)])
   console.log(`Created ${name}.mp4 (web) + poster`)

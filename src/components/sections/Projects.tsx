@@ -15,10 +15,30 @@ import { ArrowUpRight, Github } from '@/components/ui/Icons'
 const ease = [0.22, 1, 0.36, 1] as const
 type Category = (typeof projectCategories)[number]
 
-function LazyVideo({ src, poster, label }: { src: string; poster?: string; label: string }) {
+function VolumeIcon({ muted }: { muted: boolean }) {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+      <path d="M11 5 6 9H3v6h3l5 4V5z" />
+      {muted ? (
+        <>
+          <path d="m16 9 5 6" />
+          <path d="m21 9-5 6" />
+        </>
+      ) : (
+        <>
+          <path d="M15.5 8.5a5 5 0 0 1 0 7" />
+          <path d="M18.5 6a9 9 0 0 1 0 12" />
+        </>
+      )}
+    </svg>
+  )
+}
+
+function LazyVideo({ src, poster, label, withSound = false }: { src: string; poster?: string; label: string; withSound?: boolean }) {
   const { ref, inView } = useInView<HTMLDivElement>({ threshold: 0.2, rootMargin: '200px' })
   const video = useRef<HTMLVideoElement>(null)
   const [loaded, setLoaded] = useState(false)
+  const [muted, setMuted] = useState(true)
 
   useEffect(() => {
     const v = video.current
@@ -34,27 +54,47 @@ function LazyVideo({ src, poster, label }: { src: string; poster?: string; label
     }
   }, [inView, loaded, src])
 
+  const toggleSound = () => {
+    const v = video.current
+    if (!v) return
+    const next = !muted
+    v.muted = next
+    setMuted(next)
+    if (!next) v.play().catch(() => {})
+  }
+
   return (
-    <div ref={ref} className="h-full w-full">
+    <div ref={ref} className="relative h-full w-full">
       <video
         ref={video}
         poster={poster}
-        muted
+        muted={muted}
         loop
         playsInline
         preload="none"
         aria-label={label}
         className="h-full w-full object-cover transition-transform duration-[1.2s] ease-out-expo group-hover:scale-[1.04]"
       />
+      {withSound && (
+        <button
+          type="button"
+          onClick={toggleSound}
+          aria-label={muted ? 'Unmute demo' : 'Mute demo'}
+          aria-pressed={!muted}
+          className="absolute bottom-3 right-3 z-20 grid size-9 place-items-center rounded-full border border-white/20 bg-black/55 text-white backdrop-blur transition-colors hover:border-accent hover:text-accent"
+        >
+          <VolumeIcon muted={muted} />
+        </button>
+      )}
     </div>
   )
 }
 
-function ProjectMedia({ p, className }: { p: Project; className?: string }) {
+function ProjectMedia({ p, className, withSound }: { p: Project; className?: string; withSound?: boolean }) {
   return (
     <div className={cn('relative overflow-hidden bg-bg-elevated', className)}>
       {p.video ? (
-        <LazyVideo src={p.video} poster={p.image} label={`${p.title} demo`} />
+        <LazyVideo src={p.video} poster={p.image} label={`${p.title} demo`} withSound={withSound} />
       ) : (
         <Img src={p.image} alt={`${p.title} preview`} seed={p.title.length} loading="lazy" width={1280} height={720} className="h-full w-full object-cover object-[15%_center] transition-transform duration-[1.2s] ease-out-expo group-hover:scale-[1.04]" />
       )}
@@ -70,8 +110,8 @@ function FeaturedCard({ p, index, total }: { p: Project; index: number; total: n
       style={{ top: `calc(var(--nav-h) + 40px + ${index * 16}px)`, transformOrigin: 'center top' }}
       aria-labelledby={`proj-${p.slug}`}
     >
-      <Link to={`/projects/${p.slug}`} data-cursor="View" className="grid md:grid-cols-2">
-        <ProjectMedia p={p} className="aspect-[16/10] md:aspect-auto md:min-h-[440px]" />
+      <div className="grid md:grid-cols-2">
+        <ProjectMedia p={p} withSound className="aspect-[16/10] md:aspect-auto md:min-h-[440px]" />
         <div className="flex flex-col justify-between p-6 md:p-10">
           <div>
             <p className="label-mono flex items-center gap-3">
@@ -94,7 +134,14 @@ function FeaturedCard({ p, index, total }: { p: Project; index: number; total: n
             </div>
           </div>
         </div>
-      </Link>
+      </div>
+      {/* Stretched link: the whole card navigates, without nesting the sound button inside an anchor. */}
+      <Link
+        to={`/projects/${p.slug}`}
+        data-cursor="View"
+        aria-label={`View the ${p.title} case study`}
+        className="absolute inset-0 z-10 rounded-[inherit] focus-visible:outline focus-visible:outline-2 focus-visible:-outline-offset-4 focus-visible:outline-accent"
+      />
     </article>
   )
 }

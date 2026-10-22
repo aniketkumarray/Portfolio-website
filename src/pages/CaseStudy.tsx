@@ -79,7 +79,7 @@ export function CaseStudy() {
         className="card mt-12 overflow-hidden"
       >
         {project.video ? (
-          <video src={project.video} poster={project.image} controls muted loop playsInline preload="metadata" className="aspect-video w-full object-cover" aria-label={`${project.title} walkthrough`} />
+          <video src={project.video} poster={project.image} controls playsInline preload="metadata" className="aspect-video w-full object-cover" aria-label={`${project.title} walkthrough`} />
         ) : (
           <Img src={project.image} alt={`${project.title} hero`} seed={project.title.length} {...{ fetchpriority: 'high' }} width={1280} height={720} className="aspect-video w-full object-cover" />
         )}
