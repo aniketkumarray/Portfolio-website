@@ -1,4 +1,8 @@
 {
+  "redirects": [
+    { "source": "/Aniket_Kumar_Ray_Resume.pdf", "destination": "/Aniket_Kumar_Ray_Product_Manager_CV.pdf", "permanent": true },
+    { "source": "/projects/rag-learning-lab", "destination": "/projects/product-knowledge-system", "permanent": true }
+  ],
   "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }],
   "headers": [
     {

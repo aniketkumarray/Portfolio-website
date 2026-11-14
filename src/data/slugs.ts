@@ -10,7 +10,7 @@ export const projectSlugs = [
   'task-tracker',
   'interview-peer',
   'moneymap',
-  'rag-learning-lab',
+  'product-knowledge-system',
 ] as const
 
 export type ProjectSlug = (typeof projectSlugs)[number]

@@ -39,7 +39,7 @@ Everything is in **`src/data/profile.ts`** — name, contact, about copy, stats,
 - **Awards with images:** set `image: '/awards/your-file.webp'` on an award to render a photo above the text. Two entries already point at `most-organised-fy24-25.webp` and `exceeding-expectations-fy23-24.webp` — drop those files into `public/awards/` to light them up.
 - **Photography ("Through my lens" card):** `photos` in `profile.ts`; files live in `public/photos/`.
 - **Project cover art:** internal projects with no public UI use generated covers in `public/covers/`. Regenerate by running `npm run dev`, opening `/__cover/<slug>` (dev-only route) and screenshotting the 1280×720 `#cover` element.
-- **Resume PDF:** replace `public/Aniket_Kumar_Ray_Resume.pdf`.
+- **Resume PDF:** replace `public/Aniket_Kumar_Ray_Product_Manager_CV.pdf` and update `resumeUrl` in `profile.ts` if the filename changes.
 - **Profile photo:** replace `source-assets/mine.jpg` and run `npm run assets -- --force`.
 
 ## Environment

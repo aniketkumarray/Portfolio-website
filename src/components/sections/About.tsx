@@ -45,7 +45,7 @@ export function About() {
           <ImpactCard index="01" value={40} prefix="₹" suffix=" Cr" title="Processed in payments" detail="8,000+ expense & reimbursement requests on systems I built from scratch." />
         </div>
         <div data-bento className="md:col-span-8 md:row-span-1 lg:col-span-4">
-          <ImpactCard index="02" value={209} title="Product documents" detail="55 BRDs · 136 CRs · RCAs & more." />
+          <ImpactCard index="02" value={211} title="Product documents" detail="56 BRDs · 137 CRs · RCAs & more." />
         </div>
         <div data-bento className="md:col-span-6 md:row-span-1 lg:col-span-5">
           <ImpactCard index="03" value={362} title="Exits settled" detail="Exit system live since Dec 2025 — 94% hit the Full & Final deadline." />
