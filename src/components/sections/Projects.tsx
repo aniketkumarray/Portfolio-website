@@ -1,7 +1,7 @@
 import { forwardRef, useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { AnimatePresence, LayoutGroup, motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
-import { gsap } from '@/lib/gsap'
+import { gsap, ScrollTrigger } from '@/lib/gsap'
 import { projectCategories, projects } from '@/data/profile'
 import type { Project } from '@/data/types'
 import { useReducedMotion } from '@/hooks/useReducedMotion'
@@ -48,7 +48,7 @@ function LazyVideo({ src, poster, label, withSound = false }: { src: string; pos
         v.src = src
         setLoaded(true)
       }
-      v.play().catch(() => {})
+      if (!v.closest('[data-covered]')) v.play().catch(() => {})
     } else {
       v.pause()
     }
@@ -202,6 +202,33 @@ export function Projects() {
     }, el)
     return () => ctx.revert()
   }, [reduced, mobile])
+
+  // Sticky cards never leave the viewport, so pause a demo video once the next card covers it.
+  useLayoutEffect(() => {
+    const el = ref.current
+    if (!el) return
+    const ctx = gsap.context(() => {
+      const cards = gsap.utils.toArray<HTMLElement>('[data-stack-card]')
+      cards.forEach((card, i) => {
+        const next = cards[i + 1]
+        const video = card.querySelector('video')
+        if (!next || !video) return
+        ScrollTrigger.create({
+          trigger: next,
+          start: 'top top+=200',
+          onEnter: () => {
+            card.dataset.covered = ''
+            video.pause()
+          },
+          onLeaveBack: () => {
+            delete card.dataset.covered
+            if (video.currentSrc) video.play().catch(() => {})
+          },
+        })
+      })
+    }, el)
+    return () => ctx.revert()
+  }, [])
 
   return (
     <section id="projects" ref={ref} aria-labelledby="projects-title" className="section container-x">

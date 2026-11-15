@@ -13,6 +13,7 @@ import { useMagnetic } from '@/hooks/useMagnetic'
 
 const FRAME_COUNT = frameMeta.count
 const FRAME_VERSION = '1'
+const BLEND_STEPS = 16
 
 interface HeroProps {
   onProgress: (loaded: number, total: number) => void
@@ -84,18 +85,28 @@ export function Hero({ onProgress, onReady, started }: HeroProps) {
     if (ready || !useSequence) onReady()
   }, [ready, useSequence, onReady])
 
+  // Frames are ~50px of scroll apart, so cross-fade between neighbours instead of stepping.
   const render = (force = false) => {
     const canvas = canvasRef.current
     if (!canvas) return
     const ctx = canvas.getContext('2d', { alpha: false })
     if (!ctx) return
-    const idx = Math.min(total - 1, Math.max(0, Math.round(progressRef.current * (total - 1))))
-    if (!force && idx === frameIndexRef.current) return
+    const pos = Math.min(total - 1, Math.max(0, progressRef.current * (total - 1)))
+    const step = Math.round(pos * BLEND_STEPS)
+    if (!force && step === frameIndexRef.current) return
+    const idx = Math.floor(pos)
     const frame = getFrame(idx)
     if (!frame) return
-    frameIndexRef.current = idx
+    frameIndexRef.current = step
     const { w, h } = sizeRef.current
     drawCover(ctx, frame, w, h)
+    const t = pos - idx
+    const next = t > 0.02 && idx + 1 < total ? getFrame(idx + 1) : undefined
+    if (next && next !== frame) {
+      ctx.globalAlpha = t
+      drawCover(ctx, next, w, h)
+      ctx.globalAlpha = 1
+    }
   }
 
   const renderRef = useRef(render)
