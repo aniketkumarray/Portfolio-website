@@ -34,7 +34,7 @@ function VolumeIcon({ muted }: { muted: boolean }) {
   )
 }
 
-function LazyVideo({ src, poster, label, withSound = false }: { src: string; poster?: string; label: string; withSound?: boolean }) {
+function LazyVideo({ src, poster, label, withSound = false, position }: { src: string; poster?: string; label: string; withSound?: boolean; position?: string }) {
   const { ref, inView } = useInView<HTMLDivElement>({ threshold: 0.2, rootMargin: '200px' })
   const video = useRef<HTMLVideoElement>(null)
   const [loaded, setLoaded] = useState(false)
@@ -73,6 +73,7 @@ function LazyVideo({ src, poster, label, withSound = false }: { src: string; pos
         playsInline
         preload="none"
         aria-label={label}
+        style={position ? { objectPosition: position } : undefined}
         className="h-full w-full object-cover transition-transform duration-[1.2s] ease-out-expo group-hover:scale-[1.04]"
       />
       {withSound && (
@@ -94,7 +95,7 @@ function ProjectMedia({ p, className, withSound }: { p: Project; className?: str
   return (
     <div className={cn('relative overflow-hidden bg-bg-elevated', className)}>
       {p.video ? (
-        <LazyVideo src={p.video} poster={p.image} label={`${p.title} demo`} withSound={withSound} />
+        <LazyVideo src={p.video} poster={p.image} label={`${p.title} demo`} withSound={withSound} position={p.videoPosition} />
       ) : (
         <Img src={p.image} alt={`${p.title} preview`} seed={p.title.length} loading="lazy" width={1280} height={720} className="h-full w-full object-cover object-[15%_center] transition-transform duration-[1.2s] ease-out-expo group-hover:scale-[1.04]" />
       )}
@@ -192,12 +193,18 @@ export function Projects() {
       cards.forEach((card, i) => {
         const next = cards[i + 1]
         if (!next) return
-        gsap.to(card, {
-          scale: 0.95,
-          filter: 'brightness(0.55)',
-          ease: 'none',
-          scrollTrigger: { trigger: next, start: 'top bottom-=80', end: 'top top+=120', scrub: true },
-        })
+        // Explicit start values: tweening from `filter: none` makes GSAP start at brightness(0), so cards flash black.
+        gsap.fromTo(
+          card,
+          { scale: 1, filter: 'brightness(1)' },
+          {
+            scale: 0.95,
+            filter: 'brightness(0.55)',
+            ease: 'none',
+            immediateRender: false,
+            scrollTrigger: { trigger: next, start: 'top bottom-=80', end: 'top top+=120', scrub: true },
+          },
+        )
       })
     }, el)
     return () => ctx.revert()

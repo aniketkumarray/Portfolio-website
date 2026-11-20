@@ -80,6 +80,8 @@ export interface Project {
   stack: string[]
   image?: string
   video?: string
+  /** CSS object-position for the card video when it is cropped, e.g. '10% center'. */
+  videoPosition?: string
   liveUrl?: string
   repoUrl?: string
   demoUrl?: string

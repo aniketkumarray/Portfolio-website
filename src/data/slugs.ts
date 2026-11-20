@@ -5,6 +5,7 @@ export const projectSlugs = [
   'ai-voice-agent',
   'ai-assignment-checker',
   'resume-recommender',
+  'automatch-ai',
   'wingz-rag-support',
   'job-sourcing-automation',
   'task-tracker',

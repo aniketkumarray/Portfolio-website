@@ -59,7 +59,7 @@ if (car) {
   console.log('Created carchase.mp4 (web) + poster')
 }
 
-for (const name of ['moneymap-demo', 'task-tracker-demo']) {
+for (const name of ['moneymap-demo', 'task-tracker-demo', 'automatch-demo']) {
   const original = stash(`${name}.mp4`, `${name}.mp4`)
   if (!original) continue
   run([
